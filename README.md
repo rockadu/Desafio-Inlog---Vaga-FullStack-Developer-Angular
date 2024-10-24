@@ -71,7 +71,6 @@ O design do projeto fica à escolha do desenvolvedor do teste. Use sua criativid
 4. Crie teste usando sua biblioteca favorita para garantir que:
    - A listagem de veículos seja renderizada corretamente com o mapa. 🧭
    - O formulário de cadastro de veículos esteja funcionando perfeitamente. ✅
-   - A Fake API esteja respondendo corretamente. 📡
 
 #### Observações:🌟
 - Você pode utilizar bibliotecas externas para ajudar no desenvolvimento do projeto, tais como:
