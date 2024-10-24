@@ -39,7 +39,7 @@ Fique a vontade para adicionar nugets para ajudar no desenvolvimento.
 # Front - End
 
 ## Introdução 📜
-O objetivo deste desafio é criar um projeto Angular que contenha duas páginas: uma para listar veículos e outra para cadastrar novos veículos. 
+O objetivo deste desafio é criar um projeto Angular 12+ que contenha duas páginas: uma para listar veículos e outra para cadastrar novos veículos. 
 
 Na página de listagem de veículos, será necessário utilizar a biblioteca do mapa, como o Leaflet ou Google Maps API, para exibir um mapa com a localização de cada veículo da lista.
 
@@ -82,8 +82,6 @@ O design do projeto fica à escolha do desenvolvedor do teste. Use sua criativid
 
 ## Dicas 💡
 
-- Utilize o Axios para fazer requisições à API.
-- Teste todos os componentes criados.
 - Se quiser adicionar algum bônus, como uma busca de veículos ou um filtro de veículos, fique à vontade.
 
 ---
