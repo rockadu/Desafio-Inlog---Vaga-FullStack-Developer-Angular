@@ -9,13 +9,19 @@ public class VeiculoRepositorio : IVeiculoRepositorio
         _supabaseClient = supabaseClient;
     }
 
-    public Task<Domain.Models.Veiculo> CadastrarAsync(Domain.Models.Veiculo veiculo)
+    public async Task<Domain.Models.Veiculo> CadastrarAsync(Domain.Models.Veiculo veiculo)
     {
-        throw new NotImplementedException();
+        var result = await _supabaseClient
+            .From<Domain.Models.Veiculo>()
+            .Insert(veiculo);
+
+        return result.Models.First();
     }
 
-    public Task<IEnumerable<Domain.Models.Veiculo>> ListarVeiculosAsync()
+    public async Task<IEnumerable<Domain.Models.Veiculo>> ListarVeiculosAsync()
     {
-        throw new NotImplementedException();
+        return (await _supabaseClient
+            .From<Domain.Models.Veiculo>()
+            .Get()).Models;
     }
 }
