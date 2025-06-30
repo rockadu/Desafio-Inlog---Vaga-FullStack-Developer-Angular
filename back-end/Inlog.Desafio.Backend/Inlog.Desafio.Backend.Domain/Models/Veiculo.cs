@@ -1,8 +1,17 @@
-﻿namespace Inlog.Desafio.Backend.Domain.Models;
+﻿using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Models;
 
-public class Veiculo
+namespace Inlog.Desafio.Backend.Domain.Models;
+
+[Table("Veiculo")]
+public class Veiculo : BaseModel
 {
-    public string Chassi { get; set; }
+    [PrimaryKey("Chassi")]
+    public string Chassi { get; set; } = string.Empty;
+
+    [Column("TipoVeiculo")]
     public TipoVeiculo TipoVeiculo { get; set; }
-    public string Cor { get; set; }
+
+    [Column("Cor")]
+    public string Cor { get; set; } = string.Empty;
 }
