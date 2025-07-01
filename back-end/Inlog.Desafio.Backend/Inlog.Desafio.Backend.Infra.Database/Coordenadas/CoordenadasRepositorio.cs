@@ -22,6 +22,13 @@ public class CoordenadasRepositorio : ICoordenadasRepositorio
         }
     }
 
+    public async Task DeletarAsync(Domain.Models.Coordenadas coordenadas)
+    {
+        await _supabaseClient
+            .From<Domain.Models.Coordenadas>()
+            .Delete(coordenadas);
+    }
+
     public async Task<Domain.Models.Coordenadas> ObterPorRastreadorAsync(string rastreador)
     {
         return (await _supabaseClient

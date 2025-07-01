@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // ✅ Importa o módulo de testes do HttpClient
 import { VeiculosListar } from './veiculos-listar';
 
 describe('VeiculosListar', () => {
@@ -8,9 +8,11 @@ describe('VeiculosListar', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VeiculosListar]
-    })
-    .compileComponents();
+      imports: [
+        VeiculosListar,
+        HttpClientTestingModule // ✅ Injeta dependências do HttpClient para o serviço
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(VeiculosListar);
     component = fixture.componentInstance;

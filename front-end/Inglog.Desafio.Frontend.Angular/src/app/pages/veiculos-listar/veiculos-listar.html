@@ -2,10 +2,68 @@
 
 <div id="mapa" class="w-full h-80 rounded shadow mb-6 border border-slate-300"></div>
 
-<ul class="bg-white shadow rounded p-4 divide-y divide-slate-200">
-  @for (vehicle of vehicles; track vehicle.Chassi) {
-    <li class="py-2">
-      <strong>{{ vehicle.placa }}</strong> - {{ vehicle.cor }} ({{ vehicle.tipoVeiculo }})
-    </li>
-  }
-</ul>
+<section class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Veículos Cadastrados</h2>
+
+  <div class="flex items-center w-full max-w-md mb-4 relative">
+    <span class="absolute left-3 text-gray-500">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 21l-4.35-4.35M16.65 10.75a5.9 5.9 0 11-11.8 0 5.9 5.9 0 0111.8 0z" />
+      </svg>
+    </span>
+
+    <input type="text" matInput (keyup)="applyFilter($event)" placeholder="Buscar por placa, cor ou chassi"
+      class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-sm" />
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-full">
+
+    <!-- Chassi -->
+    <ng-container matColumnDef="chassi">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Chassi</th>
+      <td mat-cell *matCellDef="let v">{{ v.chassi }}</td>
+    </ng-container>
+
+    <!-- Placa -->
+    <ng-container matColumnDef="placa">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Placa</th>
+      <td mat-cell *matCellDef="let v">{{ v.placa }}</td>
+    </ng-container>
+
+    <!-- Cor -->
+    <ng-container matColumnDef="cor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cor</th>
+      <td mat-cell *matCellDef="let v">
+        <span class="inline-block w-4 h-4 rounded-full border" [style.background]="v.cor"></span>
+      </td>
+    </ng-container>
+
+    <!-- Tipo -->
+    <ng-container matColumnDef="tipoVeiculo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+      <td mat-cell *matCellDef="let v">{{ v.tipoVeiculo === 2 ? 'Caminhão' : 'Ônibus' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="distanciaMetros">
+      <th mat-header-cell *matHeaderCellDef>Distância</th>
+      <td mat-cell *matCellDef="let veiculo">
+        {{ veiculo.distanciaMetros | number: '1.0-0' }} m
+      </td>
+    </ng-container>
+
+    <!-- Ações -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let v">
+        <button mat-icon-button color="warn" (click)="deletarVeiculo(v.chassi)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="irParaVeiculo(row)" class="cursor-pointer hover:bg-gray-300 transition"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+
+</section>

@@ -1,4 +1,5 @@
-﻿namespace Inlog.Desafio.Backend.Infra.Database.Veiculo;
+﻿
+namespace Inlog.Desafio.Backend.Infra.Database.Veiculo;
 
 public class VeiculoRepositorio : IVeiculoRepositorio
 {
@@ -9,6 +10,16 @@ public class VeiculoRepositorio : IVeiculoRepositorio
         _supabaseClient = supabaseClient;
     }
 
+    public async Task<Domain.Models.Veiculo> ObterPorChassiAsync(string chassi)
+    {
+        var result = await _supabaseClient
+            .From<Domain.Models.Veiculo>()
+            .Where(x => x.Chassi == chassi)
+            .Get();
+
+        return result.Models.FirstOrDefault() ?? throw new KeyNotFoundException($"Veículo com chassi {chassi} não encontrado.");
+    }
+
     public async Task<Domain.Models.Veiculo> CadastrarAsync(Domain.Models.Veiculo veiculo)
     {
         var result = await _supabaseClient
@@ -16,6 +27,13 @@ public class VeiculoRepositorio : IVeiculoRepositorio
             .Insert(veiculo);
 
         return result.Models.First();
+    }
+
+    public async Task DeletarAsync(Domain.Models.Veiculo veiculo)
+    {
+        await _supabaseClient
+            .From<Domain.Models.Veiculo>()
+            .Delete(veiculo);
     }
 
     public async Task<IEnumerable<Domain.Models.Veiculo>> ListarVeiculosAsync()

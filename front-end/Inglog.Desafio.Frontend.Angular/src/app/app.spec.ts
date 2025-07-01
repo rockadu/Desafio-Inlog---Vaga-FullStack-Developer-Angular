@@ -1,10 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: of({}),
+            queryParams: of({}),
+            snapshot: {
+              paramMap: {
+                get: () => null
+              }
+            }
+          }
+        }
+      ]
     }).compileComponents();
   });
 
@@ -18,6 +34,6 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Inglog.Desafio.Frontend.Angular');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Veículos');
   });
 });

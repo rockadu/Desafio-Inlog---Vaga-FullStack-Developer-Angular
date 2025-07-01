@@ -26,6 +26,14 @@ public class VeiculoController : ControllerBase
         return Ok();
     }
 
+    [HttpDelete("{chassi}")]
+    public async Task<IActionResult> Deletar([FromRoute] string chassi)
+    {
+        await _veiculoServico.DeletarAsync(chassi);
+
+        return Ok();
+    }
+
     [HttpGet("Listar")]
     public async Task<IActionResult> ListarVeiculosAsync()
     {

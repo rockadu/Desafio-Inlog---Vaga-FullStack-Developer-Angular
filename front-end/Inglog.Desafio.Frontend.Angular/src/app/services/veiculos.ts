@@ -23,6 +23,16 @@ export class VeiculosService {
     }
   }
 
+  async deletar(chassi: string): Promise<void> {
+    const url = `${this.baseUrl}/${chassi}`;
+    try {
+      await firstValueFrom(this.http.delete<void>(url));
+    } catch (error) {
+      console.error('Erro ao deletar veículo:', error);
+      throw error;
+    }
+  }
+
   gerarChassiAleatorio(): string {
     const caracteres = 'ABCDEFGHJKLMNPRSTUVWXYZ0123456789'; // sem I, O, Q
     let vin = '';

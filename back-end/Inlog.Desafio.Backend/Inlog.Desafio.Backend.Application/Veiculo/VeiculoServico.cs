@@ -38,6 +38,15 @@ public class VeiculoServico : IVeiculoServico
         await _coordenadasRepositorio.CadastrarAsync(coordenadas);
     }
 
+    public async Task DeletarAsync(string chassi)
+    {
+        var veiculo = await _veiculoRepositorio.ObterPorChassiAsync(chassi);
+        var coordenadas = await _coordenadasRepositorio.ObterPorRastreadorAsync(veiculo.Rastreador);
+
+        await _coordenadasRepositorio.DeletarAsync(coordenadas);
+        await _veiculoRepositorio.DeletarAsync(veiculo);
+    }
+
     public async Task<IEnumerable<Domain.Dtos.VeiculoDto>> ListarVeiculosAsync()
     {
         var veiculos = await _veiculoRepositorio.ListarVeiculosAsync();

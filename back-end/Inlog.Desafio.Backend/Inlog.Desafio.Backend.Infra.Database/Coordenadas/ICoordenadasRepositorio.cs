@@ -3,5 +3,6 @@
 public interface ICoordenadasRepositorio
 {
     public Task CadastrarAsync(Domain.Models.Coordenadas coordenadas);
+    public Task DeletarAsync(Domain.Models.Coordenadas coordenadas);
     public Task<Domain.Models.Coordenadas> ObterPorRastreadorAsync(string rastreador);
 }
