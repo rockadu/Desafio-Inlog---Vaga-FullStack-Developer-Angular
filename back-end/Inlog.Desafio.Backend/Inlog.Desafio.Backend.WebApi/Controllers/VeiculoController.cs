@@ -1,4 +1,5 @@
 using Inlog.Desafio.Backend.Application.Veiculo;
+using Inlog.Desafio.Backend.Domain.Dtos;
 using Inlog.Desafio.Backend.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,11 @@ public class VeiculoController : ControllerBase
     }
 
     [HttpPost("Cadastrar")]
-    public async Task<IActionResult> Cadastrar([FromBody] Veiculo dadosDoVeiculo)
+    public async Task<IActionResult> Cadastrar([FromBody] CadastrarVeiculoDto input)
     {
-        var veiculo = await _veiculoServico.CadastrarAsync(dadosDoVeiculo);
+        await _veiculoServico.CadastrarAsync(input);
 
-        return Ok(veiculo);
+        return Ok();
     }
 
     [HttpGet("Listar")]
