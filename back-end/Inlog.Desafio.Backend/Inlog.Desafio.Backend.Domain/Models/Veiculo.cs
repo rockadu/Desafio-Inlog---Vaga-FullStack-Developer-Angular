@@ -8,6 +8,7 @@ namespace Inlog.Desafio.Backend.Domain.Models;
 public class Veiculo : BaseModel
 {
     [PrimaryKey("Chassi")]
+    [Column("Chassi")]
     public string Chassi { get; set; } = string.Empty;
 
     [Column("TipoVeiculo")]

@@ -9,9 +9,17 @@ public class CoordenadasRepositorio : ICoordenadasRepositorio
     }
     public async Task CadastrarAsync(Domain.Models.Coordenadas coordenadas)
     {
-        await _supabaseClient
-            .From<Domain.Models.Coordenadas>()
-            .Insert(coordenadas);
+        try
+        {
+            await _supabaseClient
+                .From<Domain.Models.Coordenadas>()
+                .Insert(coordenadas);
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
     }
 
     public async Task<Domain.Models.Coordenadas> ObterPorRastreadorAsync(string rastreador)

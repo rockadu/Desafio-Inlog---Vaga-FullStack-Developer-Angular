@@ -7,6 +7,7 @@ namespace Inlog.Desafio.Backend.Domain.Models;
 public class Coordenadas : BaseModel
 {
     [PrimaryKey("Rastreador")]
+    [Column("Rastreador")]
     public string Rastreador { get; set; } = string.Empty;
 
     [Column("Latitude")]

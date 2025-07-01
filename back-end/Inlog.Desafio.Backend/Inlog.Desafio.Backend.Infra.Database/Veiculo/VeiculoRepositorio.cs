@@ -11,19 +11,11 @@ public class VeiculoRepositorio : IVeiculoRepositorio
 
     public async Task<Domain.Models.Veiculo> CadastrarAsync(Domain.Models.Veiculo veiculo)
     {
-        try
-        {
-            var result = await _supabaseClient
-                .From<Domain.Models.Veiculo>()
-                .Insert(veiculo);
+        var result = await _supabaseClient
+            .From<Domain.Models.Veiculo>()
+            .Insert(veiculo);
 
-            return result.Models.First();
-        }
-        catch (Exception ex)
-        {
-
-            throw;
-        }
+        return result.Models.First();
     }
 
     public async Task<IEnumerable<Domain.Models.Veiculo>> ListarVeiculosAsync()
