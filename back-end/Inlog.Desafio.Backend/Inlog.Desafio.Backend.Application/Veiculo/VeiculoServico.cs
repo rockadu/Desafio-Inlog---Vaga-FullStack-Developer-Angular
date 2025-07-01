@@ -16,6 +16,10 @@ public class VeiculoServico : IVeiculoServico
 
     public async Task CadastrarAsync(Domain.Dtos.VeiculoDto input)
     {
+        var veiculos = await _veiculoRepositorio.ListarVeiculosAsync();
+
+        if (veiculos.Any(v => v.Chassi == input.Chassi))
+            throw new ArgumentException($"Já existe um veículo cadastrado com o chassi {input.Chassi}.");
 
         var veiculo = new Domain.Models.Veiculo
         {
