@@ -12,6 +12,17 @@ export class VeiculosService {
     await firstValueFrom(this.http.post(`${this.baseUrl}/Cadastrar`, veiculo));
   }
 
+  async listar(): Promise<any[]> {
+    const url = `${this.baseUrl}/Listar`;
+    try {
+      const response = await firstValueFrom(this.http.get<any[]>(url));
+      return response;
+    } catch (error) {
+      console.error('Erro ao buscar veículos:', error);
+      return [];
+    }
+  }
+
   gerarChassiAleatorio(): string {
     const caracteres = 'ABCDEFGHJKLMNPRSTUVWXYZ0123456789'; // sem I, O, Q
     let vin = '';

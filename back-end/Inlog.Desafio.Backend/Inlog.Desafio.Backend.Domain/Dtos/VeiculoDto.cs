@@ -2,7 +2,7 @@
 
 namespace Inlog.Desafio.Backend.Domain.Dtos;
 
-public class CadastrarVeiculoDto
+public class VeiculoDto
 {
     public string Chassi { get; set; } = string.Empty;
     public int TipoVeiculo { get; set; }

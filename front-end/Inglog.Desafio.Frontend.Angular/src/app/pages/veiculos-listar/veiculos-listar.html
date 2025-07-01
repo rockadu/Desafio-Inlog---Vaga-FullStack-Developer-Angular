@@ -1,1 +1,11 @@
-<p>veiculos-listar works!</p>
+<h2 class="text-2xl font-bold text-slate-800 mb-4">Veículos Próximos</h2>
+
+<div id="mapa" class="w-full h-80 rounded shadow mb-6 border border-slate-300"></div>
+
+<ul class="bg-white shadow rounded p-4 divide-y divide-slate-200">
+  @for (vehicle of vehicles; track vehicle.Chassi) {
+    <li class="py-2">
+      <strong>{{ vehicle.placa }}</strong> - {{ vehicle.cor }} ({{ vehicle.tipoVeiculo }})
+    </li>
+  }
+</ul>

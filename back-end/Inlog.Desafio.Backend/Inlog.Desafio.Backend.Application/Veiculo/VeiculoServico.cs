@@ -14,7 +14,7 @@ public class VeiculoServico : IVeiculoServico
         _coordenadasRepositorio = coordenadasRepositorio;
     }
 
-    public async Task CadastrarAsync(Domain.Dtos.CadastrarVeiculoDto input)
+    public async Task CadastrarAsync(Domain.Dtos.VeiculoDto input)
     {
 
         var veiculo = new Domain.Models.Veiculo
@@ -38,8 +38,32 @@ public class VeiculoServico : IVeiculoServico
         await _coordenadasRepositorio.CadastrarAsync(coordenadas);
     }
 
-    public async Task<IEnumerable<Domain.Models.Veiculo>> ListarVeiculosAsync()
+    public async Task<IEnumerable<Domain.Dtos.VeiculoDto>> ListarVeiculosAsync()
     {
-        return await _veiculoRepositorio.ListarVeiculosAsync();
+        var veiculos = await _veiculoRepositorio.ListarVeiculosAsync();
+
+        var veiculosDto = veiculos.Select(v => new Domain.Dtos.VeiculoDto
+        {
+            Chassi = v.Chassi,
+            TipoVeiculo = (int)v.TipoVeiculo,
+            Cor = v.Cor,
+            Placa = v.Placa,
+            Rastreador = v.Rastreador
+        }).ToList();
+
+        foreach (var veiculoDto in veiculosDto)
+        {
+            var coordenadas = await _coordenadasRepositorio.ObterPorRastreadorAsync(veiculoDto.Rastreador);
+            if (coordenadas != null)
+            {
+                veiculoDto.Coordenadas = new Domain.Dtos.CoordenadasDto
+                {
+                    Latitude = coordenadas.Latitude,
+                    Longitude = coordenadas.Longitude
+                };
+            }
+        }
+
+        return veiculosDto;
     }
 }

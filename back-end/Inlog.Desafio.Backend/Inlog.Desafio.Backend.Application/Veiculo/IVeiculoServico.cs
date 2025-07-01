@@ -2,6 +2,6 @@
 
 public interface IVeiculoServico
 {
-    public Task CadastrarAsync(Domain.Dtos.CadastrarVeiculoDto veiculo);
-    public Task<IEnumerable<Domain.Models.Veiculo>> ListarVeiculosAsync();
+    public Task CadastrarAsync(Domain.Dtos.VeiculoDto veiculo);
+    public Task<IEnumerable<Domain.Dtos.VeiculoDto>> ListarVeiculosAsync();
 }

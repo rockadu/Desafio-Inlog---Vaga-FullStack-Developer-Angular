@@ -19,7 +19,7 @@ public class VeiculoController : ControllerBase
     }
 
     [HttpPost("Cadastrar")]
-    public async Task<IActionResult> Cadastrar([FromBody] CadastrarVeiculoDto input)
+    public async Task<IActionResult> Cadastrar([FromBody] VeiculoDto input)
     {
         await _veiculoServico.CadastrarAsync(input);
 
@@ -29,7 +29,7 @@ public class VeiculoController : ControllerBase
     [HttpGet("Listar")]
     public async Task<IActionResult> ListarVeiculosAsync()
     {
-        var veiculos = await _veiculoServico.ListarVeiculosAsync();
+        var veiculos = (await _veiculoServico.ListarVeiculosAsync()).ToList();
 
         return Ok(veiculos);
     }
